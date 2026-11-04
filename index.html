@@ -1,0 +1,169 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MLEHOY JEPE</title><style>
+:root{--bg:#091321;--p:#122238;--p2:#0d1a2b;--line:#2a4562;--txt:#eaf2ff;--mut:#9eb2ca;--gold:#ffca70;--cyan:#68d6e5;--green:#78d6a0}*{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#07111e,#102038);color:var(--txt);font:14px system-ui,Arial}.wrap{max-width:1180px;margin:auto;padding:16px}.head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:15px}.brand{display:flex;align-items:center;gap:12px}.logo{background:linear-gradient(135deg,#ffce78,#e8874c);color:#172235;border-radius:12px;padding:9px 14px;font-size:24px;font-weight:900}.brand h1{margin:0;font-size:22px}.brand small,.sub{color:var(--mut)}.badge,.pill{border:1px solid var(--line);border-radius:30px;padding:5px 10px;color:var(--green);font-size:11px}.tabs{display:flex;gap:7px;overflow:auto;margin-bottom:12px}.tab,button{cursor:pointer;border:1px solid var(--line);border-radius:9px;background:#182b43;color:var(--txt);padding:10px 12px}.tab.active,.primary{background:linear-gradient(135deg,#ffcf77,#e99a50);color:#1a2637;border:0;font-weight:800}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.card{background:var(--p);border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:13px}.card h2{font-size:16px;margin:0 0 8px}.sub{font-size:12px}.field{margin:10px 0}.field label{display:block;color:var(--mut);font-size:11px;font-weight:800;margin-bottom:5px}input,select,textarea{width:100%;background:#091727;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:11px;font:inherit}textarea{min-height:90px}.row,.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stats{grid-template-columns:repeat(3,1fr)}.metric,.item{background:var(--p2);border:1px solid var(--line);border-radius:9px;padding:9px}.metric b{display:block;color:var(--gold);font-size:19px}.metric span{font-size:10px;color:var(--mut)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.actions button{flex:1}.notice{font-size:12px;color:#c9d7e8;background:#172b42;border-left:3px solid var(--gold);padding:9px;border-radius:7px;margin-top:9px}.bbfs{font-size:34px;color:var(--gold);letter-spacing:5px;font-weight:900;overflow-wrap:anywhere}.list{display:grid;gap:6px}.item{display:flex;justify-content:space-between;align-items:center;gap:8px}.digits{font-size:18px;font-weight:900;letter-spacing:2px}.history{max-height:340px;overflow:auto}.muted{color:var(--mut);font-size:12px}.small{font-size:11px;color:var(--mut)}footer{text-align:center;color:var(--mut);padding:15px;font-size:11px}@media(max-width:800px){.grid{grid-template-columns:1fr}.wrap{padding:11px}.row{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+</style><meta name="theme-color" content="#091321">
+<meta name="description" content="MLEHOY JEPE - alat analisis statistik dan generator BBFS.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+</head><body><div class="wrap"><header class="head"><div class="brand"><div class="logo">M</div><div><h1>MLEHOY JEPE</h1><small>HYBRID STATISTICAL LAB · LOCAL DATABASE</small></div></div><span class="badge">● PENYIMPANAN LOKAL</span></header><nav class="tabs" id="tabs"></nav><div class="grid"><main>
+<section class="card"><h2>📷 Smart Screenshot Scanner</h2><p class="sub">Upload banyak gambar. OCR membantu membaca teks; periksa dan koreksi sebelum menyimpan.</p><div class="field"><label>SCREENSHOT</label><input id="shots" type="file" accept="image/*" multiple></div><div class="row"><div class="field"><label>NAMA PASARAN (AUTO / KOREKSI)</label><select id="ocrMarket"><option>Hongkong Lotto</option><option>Hongkong Pools</option><option>Sydney</option><option>Singapore</option><option>Macau 4D</option><option>Macau 5D</option></select></div><div class="field"><label>FORMAT DIGIT</label><select id="ocrDigits"><option>4</option><option>5</option></select></div></div><div class="field"><label>HASIL BACAAN OCR — WAJIB DIPERIKSA</label><textarea id="ocrText" placeholder="Teks OCR tampil di sini"></textarea></div><div class="actions"><button class="primary" id="readOCR">BACA SCREENSHOT</button><button id="saveOCR">KONFIRMASI & SIMPAN</button></div><div id="ocrStatus" class="small">OCR memerlukan internet saat pertama kali memuat Tesseract.js.</div><div class="notice">Screenshot asli dan hasil yang dikonfirmasi diarsipkan pada perangkat. Pilih salah satu dari enam pasaran yang tersedia. Periksa hasil OCR sebelum menyimpan.</div></section>
+<section class="card"><h2>⌨️ Input manual & impor historis</h2><div class="row"><div class="field"><label>NAMA PASARAN</label><select id="marketName"><option>Hongkong Lotto</option><option>Hongkong Pools</option><option>Sydney</option><option>Singapore</option><option>Macau 4D</option><option>Macau 5D</option></select></div><div class="field"><label>FORMAT</label><select id="digits"><option>4</option><option>5</option></select></div></div><div class="field"><label>HASIL TERBARU</label><input id="latest" inputmode="numeric" maxlength="6" placeholder="Contoh: 08271"></div><button class="primary" id="saveLatest" style="width:100%">SIMPAN HASIL</button><div class="field"><label>IMPORT — SATU HASIL PER BARIS, BARIS PERTAMA TERBARU</label><textarea id="bulk" placeholder="08271&#10;10592&#10;63824"></textarea></div><div class="actions"><button id="import">IMPORT DATA</button><button id="csv">EKSPOR CSV</button></div></section>
+<section class="card"><h2>🧠 Hybrid Prediction Engine</h2><div class="row"><div class="field"><label>PERIODE ANALISIS</label><select id="period"><option>20</option><option selected>50</option><option>100</option><option value="all">Semua data</option></select></div><div class="field"><label>PANJANG BBFS</label><select id="bbfsLen"><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option><option>9</option><option>10</option></select></div></div><button class="primary" id="analyze" style="width:100%">ANALISIS & GENERATE BBFS</button><div id="prediction" class="muted" style="margin-top:12px">Masukkan data untuk memulai.</div></section>
+<section class="card"><h2>🏆 TOP DIGIT HASIL BBFS</h2><p class="sub">BBFS dipecah menjadi kandidat 4D, 3D, dan 2D. Mesin menampilkan lima baris teratas untuk setiap kategori berdasarkan frekuensi posisi historis. Ini ranking statistik, bukan jaminan hasil berikutnya.</p><div id="topDigits" class="list muted">Jalankan analisis BBFS untuk menampilkan top digit.</div></section>
+<section class="card"><h2>🎯 Smart Combination Engine</h2><div class="row"><div class="field"><label>METODE 2D/3D</label><select id="comboMode"><option value="back">Posisi belakang</option><option value="all">Seluruh posisi</option></select></div><div class="field"><label>KATEGORI</label><select id="comboType"><option value="all">2D, 3D, 4D</option><option value="2">2D</option><option value="3">3D</option><option value="4">4D</option></select></div></div><div id="combos" class="muted">Generate BBFS terlebih dahulu.</div><div class="notice">Ranking menggabungkan statistik posisi (65%), pasangan berurutan (30%), dan struktur pengulangan digit (5%). Digit kombinasi hanya diambil dari BBFS; digit boleh berulang untuk menguji pola twin/triple/quad. Skor adalah skor model, bukan probabilitas hasil undian.</div></section></main><aside>
+<section class="card"><h2>📊 Ringkasan</h2><div id="stats" class="stats"></div><div class="actions"><button id="backup">BACKUP DATABASE</button><button id="restoreBtn">RESTORE</button><input id="restore" type="file" accept="application/json" style="display:none"></div></section><section class="card"><h2>🔢 Ranking digit 0–9</h2><div id="ranking" class="list muted">Belum dianalisis.</div></section><section class="card"><h2>📍 Statistik posisi</h2><div id="positions" class="list muted">Belum ada data.</div></section><section class="card"><h2>🔒 Prediction Lock & Backtest</h2><p class="sub">Snapshot prediksi dikunci sebelum hasil berikutnya diketahui.</p><div class="actions"><button id="lock">KUNCI PREDIKSI</button><button id="backtest">WALK-FORWARD TEST</button></div><div id="evaluation" class="muted" style="margin-top:9px">Belum ada evaluasi.</div><div class="notice">Skor bukan probabilitas kemenangan. Undian acak dan independen tidak dapat diprediksi secara pasti.</div></section><section class="card"><h2>🗂️ Riwayat hasil & screenshot</h2><div id="history" class="history muted">Belum ada data.</div><div class="actions"><button id="clear">HAPUS PASARAN INI</button></div></section></aside></div><footer>MLEHOY JEPE · 6 Pasaran Tetap · Database lokal perangkat · Backup berkala disarankan</footer></div>
+<script>
+(()=>{'use strict';const $=id=>document.getElementById(id),DB='numeriq_v3_db',R='results',S='screenshots',L='locks';let db,active='Hongkong Lotto',model=null,files=[];const MARKETS=['Hongkong Lotto','Hongkong Pools','Sydney','Singapore','Macau 4D','Macau 5D'];const marketDigits=m=>m==='Macau 5D'?5:4;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const clean=s=>String(s||'').trim().replace(/\s+/g,' ').slice(0,50);const valid=(s,n)=>new RegExp('^\\d{'+n+'}$').test(String(s));
+function openDB(){return new Promise((ok,no)=>{let q=indexedDB.open(DB,1);q.onupgradeneeded=()=>{let d=q.result;[R,S,L].forEach(s=>{if(!d.objectStoreNames.contains(s))d.createObjectStore(s,{keyPath:'id',autoIncrement:true})})};q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})}function store(s,mode='readonly'){return db.transaction(s,mode).objectStore(s)}function all(s){return new Promise((ok,no)=>{let q=store(s).getAll();q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})}function put(s,v){return new Promise((ok,no)=>{let q=store(s,'readwrite').put(v);q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})}function del(s,id){return new Promise(ok=>{let q=store(s,'readwrite').delete(id);q.onsuccess=ok})}function download(data,name,type){let a=document.createElement('a'),u=URL.createObjectURL(new Blob([data],{type}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+async function saveResult(result,market,n,source='manual',period='',shotId=null){if(!valid(result,n))throw Error('Hasil harus tepat '+n+' digit; nol di depan harus dipertahankan.');let rows=await all(R);if(period&&rows.some(x=>x.market===market&&x.period===period))throw Error('Periode sudah tercatat untuk pasaran ini.');await put(R,{market,digits:+n,result:String(result),period,source,shotId,time:Date.now()})}
+function detectMarket(t){let z=t.toLowerCase();if(z.includes('hongkong pools')||z.includes('hong kong pools'))return 'Hongkong Pools';if(z.includes('hongkong lotto')||z.includes('hong kong lotto'))return 'Hongkong Lotto';if(z.includes('singapore'))return 'Singapore';if(z.includes('sydney'))return 'Sydney';if(z.includes('macau')&&(/5d|5 digit/.test(z)))return 'Macau 5D';if(z.includes('macau'))return 'Macau 4D';return ''}
+async function render(){let rows=await all(R),shots=await all(S),locks=await all(L),markets=MARKETS;$('tabs').innerHTML=markets.map(m=>`<button class="tab ${m===active?'active':''}" data-market="${esc(m)}">${esc(m.toUpperCase())}</button>`).join('');document.querySelectorAll('[data-market]').forEach(b=>b.onclick=()=>{active=b.dataset.market;model=null;render()});let mine=rows.filter(x=>x.market===active).sort((a,b)=>b.time-a.time);$('marketName').value=active;$('digits').value=marketDigits(active);$('ocrMarket').value=active;$('ocrDigits').value=String(marketDigits(active));$('stats').innerHTML=[['HASIL',mine.length],['SCREENSHOT',shots.filter(x=>x.market===active).length],['PREDIKSI TERKUNCI',locks.filter(x=>x.market===active).length]].map(x=>`<div class="metric"><b>${x[1]}</b><span>${x[0]}</span></div>`).join('');$('history').innerHTML=mine.slice(0,100).map(x=>`<div class="item"><div><b class="digits">${esc(x.result)}</b><div class="small">${esc(x.period||'Tanpa periode')} · ${new Date(x.time).toLocaleString('id-ID')} · ${esc(x.source)}</div></div><button data-del="${x.id}">Hapus</button></div>`).join('')||'Belum ada riwayat.';document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{if(confirm('Hapus hasil ini?')){await del(R,+b.dataset.del);render()}})}
+$('saveLatest').onclick=async()=>{try{let m=active,n=marketDigits(active);await saveResult($('latest').value.trim(),m,n);active=m;$('latest').value='';alert('Hasil tersimpan.');render()}catch(e){alert(e.message)}};$('import').onclick=async()=>{let m=active,n=marketDigits(active),lines=$('bulk').value.split(/\n/).map(x=>x.trim()).filter(Boolean),ok=0,bad=0;for(let r of lines){try{await saveResult(r,m,n,'import');ok++}catch(e){bad++}}alert(`Tersimpan: ${ok} · Ditolak: ${bad}`);active=m;render()};$('csv').onclick=async()=>{let a=(await all(R)).filter(x=>x.market===active),s='market,digits,result,period,time,source\n'+a.map(x=>[x.market,x.digits,x.result,x.period,new Date(x.time).toISOString(),x.source].map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n');download(s,active+'_history.csv','text/csv')};
+$('shots').onchange=e=>files=[...e.target.files];$('readOCR').onclick=async()=>{if(!files.length)return alert('Pilih screenshot dahulu.');try{if(!window.Tesseract){let s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';document.head.append(s);await new Promise((a,b)=>{s.onload=a;s.onerror=b})}window.ocrBatches=[];let text='';for(let f of files){let r=await Tesseract.recognize(f,'eng',{logger:m=>$('ocrStatus').textContent=m.status+' '+Math.round((m.progress||0)*100)+'%'});window.ocrBatches.push({file:f,text:r.data.text});text+=`\n--- ${f.name} ---\n${r.data.text}\n`} $('ocrText').value=text;let m=detectMarket(text);if(m){$('ocrMarket').value=m;$('ocrDigits').value=String(marketDigits(m));}$('ocrStatus').textContent='OCR selesai. Periksa dan koreksi teks; simpan per gambar.'}catch(e){$('ocrStatus').textContent='OCR gagal: '+e.message}};$('saveOCR').onclick=async()=>{let m=$('ocrMarket').value||active,n=marketDigits(m),text=$('ocrText').value,batches=window.ocrBatches||[];if(!confirm(`Pasaran: ${m}\nFormat: ${n}D\nSimpan angka yang sudah kamu periksa pada kolom OCR?`))return;let saved=0;if(batches.length){for(let batch of batches){let id=await put(S,{market:m,name:batch.file.name,type:batch.file.type,blob:batch.file,time:Date.now()});let nums=[...batch.text.matchAll(new RegExp('(?<!\\d)\\d{'+n+'}(?!\\d)','g'))].map(x=>x[0]);for(let x of nums){try{await saveResult(x,m,n,'ocr','',id);saved++}catch(e){}}}}else{let nums=[...text.matchAll(new RegExp('(?<!\\d)\\d{'+n+'}(?!\\d)','g'))].map(x=>x[0]);for(let x of nums){try{await saveResult(x,m,n,'ocr');saved++}catch(e){}}}active=m;alert(saved+' hasil tersimpan. Periksa kembali riwayat untuk memastikan tidak ada angka yang salah.');render()};
+function calc(rows,n,len){let freq=Array(10).fill(0),recent=Array(10).fill(0),pos=Array.from({length:n},()=>Array(10).fill(0)),gap=Array(10).fill(rows.length);rows.forEach((x,i)=>[...x.result].forEach((d,p)=>{freq[+d]++;if(i<10)recent[+d]++;pos[p][+d]++}));for(let d=0;d<10;d++){let i=rows.findIndex(x=>x.result.includes(String(d)));if(i>=0)gap[d]=i}let mf=Math.max(1,...freq),mr=Math.max(1,...recent),scores=freq.map((v,d)=>.5*v/mf+.25*recent[d]/mr+.15*(1-gap[d]/Math.max(1,rows.length))+.1*pos.reduce((s,p)=>s+p[d],0)/Math.max(1,rows.length*n)),rank=scores.map((s,d)=>({d:String(d),s})).sort((a,b)=>b.s-a.s);return{freq,pos,rank,bbfs:rank.slice(0,len).map(x=>x.d).join(''),rows,n}}
+$('analyze').onclick=async()=>{let rows=(await all(R)).filter(x=>x.market===active).sort((a,b)=>b.time-a.time),p=$('period').value;rows=p==='all'?rows:rows.slice(0,+p);let n=rows[0]?.digits||4;if(rows.length<5)return alert('Masukkan minimal 5 hasil; lebih banyak data lebih baik.');model=calc(rows,n,+$('bbfsLen').value);$('prediction').innerHTML=`<div class="small">BBFS ${model.bbfs.length} digit · ${rows.length} data · format ${n}D</div><div class="bbfs">${model.bbfs}</div><div class="stats"><div class="metric"><b>${rows.length}</b><span>DATA</span></div><div class="metric"><b>${n}</b><span>POSISI</span></div><div class="metric"><b>${model.bbfs.length}</b><span>DIGIT BBFS</span></div></div>`;$('ranking').innerHTML=model.rank.map((x,i)=>`<div class="item"><span>${i+1}. Digit <b>${x.d}</b></span><span class="pill">Skor ${(x.s*100).toFixed(1)}</span></div>`).join('');let top=model.rank.slice(0,+$('bbfsLen').value);$('topDigits').innerHTML=top.map((x,i)=>{let d=+x.d,frequency=model.freq[d],recent=model.rows.slice(0,10).reduce((sum,r)=>sum+([...r.result].filter(z=>z===x.d).length),0),lastGap=model.rows.findIndex(r=>r.result.includes(x.d));return `<div class="item"><span><b>${i+1}. DIGIT ${x.d}</b><div class="small">Frekuensi: ${frequency} · 10 hasil terbaru: ${recent} · Jarak kemunculan: ${lastGap<0?'Belum muncul':lastGap+' hasil'}</div></span><span class="pill">Skor ${(x.s*100).toFixed(1)}</span></div>`}).join('');$('positions').innerHTML=model.pos.map((p,i)=>`<div class="item"><b>Posisi ${i+1}</b><span class="small">${p.map((v,d)=>d+':'+v).join(' · ')}</span></div>`).join('');combos()};
+
+function positionSets(k,mode){
+  const n=model.n;
+  if(mode==='back') return [Array.from({length:k},(_,i)=>n-k+i)];
+  const out=[];
+  function go(start,a){
+    if(a.length===k){out.push(a.slice());return}
+    for(let p=start;p<n;p++)go(p+1,[...a,p]);
+  }
+  go(0,[]);
+  return out;
+}
+function patternType(s){
+  const counts={};
+  [...s].forEach(d=>counts[d]=(counts[d]||0)+1);
+  const max=Math.max(...Object.values(counts));
+  if(max===s.length && s.length>=2) return s.length===4?'Quad':'Triple+';
+  if(max===3) return 'Triple';
+  if(max===2) return 'Twin';
+  return 'Semua berbeda';
+}
+function buildPairModel(rows,n){
+  const pair=Array.from({length:n-1},()=>Array.from({length:10},()=>Array(10).fill(0)));
+  const pairTotals=Array(n-1).fill(0);
+  const structures={Twin:0,Triple:0,Quad:0,'Semua berbeda':0};
+  rows.forEach(row=>{
+    const s=String(row.result);
+    for(let p=0;p<n-1;p++){
+      const a=+s[p],b=+s[p+1];
+      if(Number.isInteger(a)&&Number.isInteger(b)){pair[p][a][b]++;pairTotals[p]++}
+    }
+    const t=patternType(s);
+    if(structures[t]!==undefined)structures[t]++;
+    else if(t==='Triple+')structures.Triple++;
+  });
+  return {pair,pairTotals,structures,total:rows.length};
+}
+function scoreCandidate(s,positions,pairModel){
+  const eps=0.5;
+  let posLog=0;
+  for(let i=0;i<s.length;i++){
+    const col=model.pos[positions[i]];
+    const total=col.reduce((a,b)=>a+b,0);
+    const p=(col[+s[i]]+eps)/(total+10*eps);
+    posLog+=Math.log(p);
+  }
+  posLog/=s.length;
+
+  // Skor pasangan digit berurutan pada posisi yang bersebelahan.
+  let pairLog=0,pairCount=0;
+  for(let i=0;i<s.length-1;i++){
+    const p=positions[i];
+    if(positions[i+1]!==p+1) continue;
+    const total=pairModel.pairTotals[p];
+    const count=pairModel.pair[p][+s[i]][+s[i+1]];
+    const probability=(count+0.5)/(total+5);
+    pairLog+=Math.log(probability);
+    pairCount++;
+  }
+  if(pairCount)pairLog/=pairCount;
+  else pairLog=posLog;
+
+  // Struktur angka berulang diberi bobot kecil dan smoothing agar tidak dominan.
+  const type=patternType(s);
+  const structureCount=pairModel.structures[type]||0;
+  const structureLog=Math.log((structureCount+1)/(pairModel.total+4));
+
+  // Campuran log-score: posisi paling dominan, pasangan sebagai penguat,
+  // pola pengulangan hanya komponen kecil.
+  const combined=0.65*posLog+0.30*pairLog+0.05*structureLog;
+  return {score:Math.exp(combined),position:Math.exp(posLog),pair:Math.exp(pairLog),type};
+}
+function enumerateCandidates(d,k,limit=20000){
+  const out=[];
+  function go(s){
+    if(s.length===k){out.push(s);return}
+    for(const digit of d){
+      if(out.length>=limit)return;
+      go(s+digit);
+    }
+  }
+  go('');
+  return out;
+}
+function combos(){
+  if(!model){$('combos').innerHTML='Jalankan analisis BBFS terlebih dahulu.';return;}
+  const ks=$('comboType').value==='all'?[4,3,2]:[+$('comboType').value];
+  const digits=model.bbfs.split('');
+  const mode=$('comboMode').value;
+  const pairModel=buildPairModel(model.rows,model.n);
+  let out='';
+  for(const k of ks){
+    if(k>model.n){out+=`<h3>${k}D</h3><p class="muted">Format hasil hanya ${model.n}D; kategori ini tidak tersedia.</p>`;continue;}
+    const sets=positionSets(k,mode);
+    const ranked=[];
+    for(const candidate of enumerateCandidates(digits,k)){
+      let best=null;
+      for(const positions of sets){
+        const scored=scoreCandidate(candidate,positions,pairModel);
+        if(!best||scored.score>best.score)best={...scored,positions};
+      }
+      ranked.push({s:candidate,...best});
+    }
+    ranked.sort((a,b)=>b.score-a.score||a.s.localeCompare(b.s));
+    const top=ranked.slice(0,3);
+    out+=`<h3>${k}D — TOP 3 rekomendasi (${mode==='back'?'posisi belakang':'seluruh posisi'})</h3>`;
+    out+=top.map((x,i)=>`<div class="item"><span>${['🥇 Prioritas utama','🥈 Alternatif 1','🥉 Alternatif 2'][i]} <b class="digits">${x.s}</b> <span class="pill">Skor ${(x.score*100).toFixed(2)}</span><div class="small">Posisi ${(x.position*100).toFixed(2)} · Pasangan ${(x.pair*100).toFixed(2)} · Pola ${x.type}</div></span><button onclick="navigator.clipboard?.writeText('${x.s}')">Salin</button></div>`).join('');
+  }
+  $('combos').innerHTML=out||'Tidak ada kombinasi.';
+}
+$('comboMode').onchange=combos;$('comboType').onchange=combos;
+$('lock').onclick=async()=>{if(!model)return alert('Generate BBFS dahulu.');let id=await put(L,{market:active,bbfs:model.bbfs,created:Date.now(),dataCount:model.rows.length,digits:model.n,combinations:$('combos').innerText});alert('Snapshot prediksi dikunci. ID '+id);render()};
+$('backtest').onclick=async()=>{
+ const box=$('evaluation'); box.innerHTML='<b>Menyiapkan Walk-Forward Test...</b>'; $('backtest').disabled=true;
+ try{
+  const rows=(await all(R)).filter(x=>x.market===active).sort((a,b)=>a.time-b.time);
+  if(rows.length<11){box.innerHTML=`<b>Data belum cukup.</b><br>Pasaran ${esc(active)} memiliki ${rows.length} hasil. Minimal 11 hasil diperlukan: 10 hasil untuk data latih dan 1 hasil untuk pengujian.`;return;}
+  let coverage=0,coverageBase=0,tests=0,hit4=0,hit3=0,hit2=0,eligible4=0,eligible3=0,eligible2=0;
+  const bbfsLen=8;
+  function topFor(k,bbfs,trainModel){
+   const oldModel=model;
+   try{model=trainModel;const pm=buildPairModel(trainModel.rows,trainModel.n),digits=bbfs.split(''),sets=positionSets(k,'back'),ranked=[];
+    for(const candidate of enumerateCandidates(digits,k)){let best=null;for(const positions of sets){const sc=scoreCandidate(candidate,positions,pm);if(!best||sc.score>best.score)best=sc;}ranked.push({s:candidate,score:best.score});}
+    ranked.sort((a,b)=>b.score-a.score||a.s.localeCompare(b.s));return ranked.slice(0,3).map(x=>x.s);
+   }finally{model=oldModel;}
+  }
+  for(let i=10;i<rows.length;i++){
+   const target=rows[i],train=rows.slice(Math.max(0,i-100),i).reverse();
+   const m=calc(train,target.digits,bbfsLen),unique=[...new Set(target.result)];
+   coverage+=unique.length?unique.filter(d=>m.bbfs.includes(d)).length/unique.length:0;coverageBase+=Math.min(1,m.bbfs.length/10);tests++;
+   if(target.digits>=4){eligible4++;if(topFor(4,m.bbfs,m).includes(target.result.slice(-4)))hit4++;}
+   if(target.digits>=3){eligible3++;if(topFor(3,m.bbfs,m).includes(target.result.slice(-3)))hit3++;}
+   if(target.digits>=2){eligible2++;if(topFor(2,m.bbfs,m).includes(target.result.slice(-2)))hit2++;}
+   if(tests%5===0){box.textContent=`Walk-Forward berjalan: ${tests} dari ${rows.length-10} titik uji...`;await new Promise(resolve=>setTimeout(resolve,0));}
+  }
+  const pct=(a,b)=>b?(100*a/b).toFixed(2)+'%':'—';
+  box.innerHTML=`<div class="stats"><div class="metric"><b>${pct(coverage,tests)}</b><span>CAKUPAN DIGIT UNIK BBFS</span></div><div class="metric"><b>${pct(hit4,eligible4)}</b><span>HIT TOP 3 · 4D BELAKANG</span></div><div class="metric"><b>${pct(hit3,eligible3)}</b><span>HIT TOP 3 · 3D BELAKANG</span></div><div class="metric"><b>${pct(hit2,eligible2)}</b><span>HIT TOP 3 · 2D BELAKANG</span></div><div class="metric"><b>${tests}</b><span>TITIK UJI WALK-FORWARD</span></div><div class="metric"><b>${pct(coverageBase,tests)}</b><span>BASELINE CAKUPAN BBFS KASAR</span></div></div><p>Pasaran: ${esc(active)} · Data historis: ${rows.length}. Pengujian memakai data sebelum setiap hasil target. 2D = dua digit terakhir, 3D = tiga digit terakhir, 4D = empat digit terakhir. Hit berarti target persis cocok dengan salah satu dari tiga rekomendasi. Ini evaluasi historis, bukan jaminan hasil berikutnya.</p>`;
+ }catch(err){box.innerHTML=`<b>Backtest gagal dijalankan.</b><br>${esc(err?.message||err)}<br>Silakan kirim screenshot pesan ini.`;}
+ finally{$('backtest').disabled=false;}
+};
+$('backup').onclick=async()=>download(JSON.stringify({version:3,exported:new Date().toISOString(),results:await all(R),screenshots:await all(S),locks:await all(L)}),'NUMERIQ_V3_BACKUP.json','application/json');$('restoreBtn').onclick=()=>$('restore').click();$('restore').onchange=async e=>{try{let p=JSON.parse(await e.target.files[0].text());for(let [key,s] of [['results',R],['screenshots',S],['locks',L]])for(let x of p[key]||[]){delete x.id;await put(s,x)}alert('Restore selesai.');render()}catch(x){alert('Backup tidak valid: '+x.message)}};$('clear').onclick=async()=>{if(confirm('Hapus seluruh hasil untuk '+active+'?')){for(let x of (await all(R)).filter(x=>x.market===active))await del(R,x.id);render()}};
+async function migrate(){try{let old=JSON.parse(localStorage.getItem('numeriq_ai_bbfs_v1')||'{}'),map={HK:'Hong Kong',SGP:'Singapore',SDY:'Sydney',MACAU:'Macau'};for(let [k,m] of Object.entries(map))for(let x of old[k]||[]){let r=String(x.result||x.number||'');if(/^\d{4}$/.test(r))await put(R,{market:m,digits:4,result:r,period:x.period||'',source:'migrasi-v2',time:x.time?new Date(x.time).getTime():Date.now()})}}catch(e){}}
+(async()=>{try{db=await openDB();await migrate();await render()}catch(e){alert('Database tidak tersedia: '+e.message)}})();})();</script><script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.error('PWA service worker:', err)); }); }</script>
+</body></html>
